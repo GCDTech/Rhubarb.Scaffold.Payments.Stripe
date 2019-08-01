@@ -1,6 +1,6 @@
 <?php
 
-namespace Gcd\Scaffold\Payments\UI\StripePaymentCaptureControl;
+namespace Gcd\Scaffold\Payments\Stripe\UI\StripePaymentCaptureControl;
 
 use Gcd\Scaffold\Payments\UI\PaymentCaptureControl\PaymentCaptureControlView;
 

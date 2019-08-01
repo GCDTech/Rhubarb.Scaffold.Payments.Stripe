@@ -1,10 +1,8 @@
 <?php
 
-namespace Gcd\Scaffold\Payments\UI\StripePaymentCaptureControl;
+namespace Gcd\Scaffold\Payments\Stripe\UI\StripePaymentCaptureControl;
 
-use Gcd\Scaffold\Payments\UI\Entities\PaymentEntity;
 use Gcd\Scaffold\Payments\UI\PaymentCaptureControl\PaymentCaptureControl;
-use Rhubarb\Leaf\Leaves\Leaf;
 use Rhubarb\Leaf\Leaves\LeafModel;
 
 class StripePaymentCaptureControl extends PaymentCaptureControl
