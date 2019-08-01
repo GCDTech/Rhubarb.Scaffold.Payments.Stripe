@@ -5,8 +5,8 @@
   "license": "proprietary",
   "autoload": {
     "psr-4": {
-      "Gcd\\Payments\\Stripe\\": "src/",
-      "Gcd\\Payments\\Stripe\\Tests\\": "tests/"
+      "Gcd\\Scaffold\\Payments\\Stripe\\": "src/",
+      "Gcd\\Scaffold\\Payments\\Stripe\\Tests\\": "tests/"
     }
   },  
   "repositories": [    
