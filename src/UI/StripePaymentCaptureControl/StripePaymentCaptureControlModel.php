@@ -12,8 +12,20 @@ class StripePaymentCaptureControlModel extends PaymentCaptureControlModel
      */
     public $confirmPaymentEvent;
 
+    public $stripePublicKey;
+
     public function __construct()
     {
         $this->confirmPaymentEvent = new Event();
     }
+
+    protected function getExposableModelProperties()
+    {
+        $list = parent::getExposableModelProperties();
+        $list[] = "stripePublicKey";
+
+        return $list;
+    }
+
+
 }

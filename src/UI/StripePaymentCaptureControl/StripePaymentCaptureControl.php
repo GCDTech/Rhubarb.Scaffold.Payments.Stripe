@@ -2,6 +2,7 @@
 
 namespace Gcd\Scaffold\Payments\Stripe\UI\StripePaymentCaptureControl;
 
+use Gcd\Scaffold\Payments\Stripe\Settings\StripeSettings;
 use Gcd\Scaffold\Payments\UI\PaymentCaptureControl\PaymentCaptureControl;
 use Rhubarb\Leaf\Leaves\LeafModel;
 
@@ -35,6 +36,8 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
     protected function onModelCreated()
     {
         parent::onModelCreated();
+
+        $this->model->stripePublicKey = StripeSettings::singleton()->publicKey;
 
         $this->model->confirmPaymentEvent->attachHandler(function(PaymentEntity $paymentEntity){
             

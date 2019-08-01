@@ -23,4 +23,16 @@ class StripePaymentCaptureControlView extends PaymentCaptureControlView
     {
         return "StripePaymentCaptureControlViewBridge";
     }
+
+    protected function getAdditionalResourceUrls()
+    {
+        return ["https://js.stripe.com/v3/#.js"];
+    }
+
+    protected function printViewContent()
+    {
+        ?>
+        Stripe payment!
+        <?php
+    }
 }
