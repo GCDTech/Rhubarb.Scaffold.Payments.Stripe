@@ -8,6 +8,24 @@ rhubarb.vb.create('StripePaymentCaptureControlViewBridge', function(parent) {
             this.elements = this.stripe.elements();
             this.cardElement = this.elements.create('card');
             this.cardElement.mount(this.viewNode);
+        },
+        confirmPayment: function(paymentEntity) {
+
+            if (paymentEntity){
+                this.model.paymentEntity = paymentEntity;
+            }
+
+            return new Promise(function(resolve, reject) {
+                this.stripe.createPaymentMethod('card', this.cardElement).then(
+                    function (result) {
+                        this.raiseServerEvent('confirmPayment', this.model.paymentEntity, function (newPaymentEntity) {
+                            this.model.paymentEntity = newPaymentEntity;
+                            resolve(this.model.paymentEntity);
+                    }.bind(this), function () {
+                        reject();
+                    }.bind(this));
+                }.bind(this));
+            }.bind(this));
         }
     };
-}, rhubarb.viewBridgeClasses.PaymentCaptureControlViewBridge)
+}, rhubarb.viewBridgeClasses.PaymentCaptureControlViewBridge);

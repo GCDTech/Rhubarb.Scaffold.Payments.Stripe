@@ -38,9 +38,5 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
         parent::onModelCreated();
 
         $this->model->stripePublicKey = StripeSettings::singleton()->publicKey;
-
-        $this->model->confirmPaymentEvent->attachHandler(function(PaymentEntity $paymentEntity){
-            
-        });
     }
 }
