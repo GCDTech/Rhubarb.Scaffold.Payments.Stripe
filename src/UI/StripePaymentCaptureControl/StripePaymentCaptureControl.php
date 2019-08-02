@@ -50,6 +50,6 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
 
     protected function getProviderService()
     {
-        // TODO: Implement getProviderService() method.
+
     }
 }

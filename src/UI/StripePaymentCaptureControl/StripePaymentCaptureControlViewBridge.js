@@ -12,23 +12,38 @@ rhubarb.vb.create('StripePaymentCaptureControlViewBridge', function(parent) {
 
             this.cardElement.mount(this.viewNode);
         },
-        confirmPayment: function(paymentEntity) {
-
-            if (paymentEntity){
-                this.model.paymentEntity = paymentEntity;
-            }
-
-            return new Promise(function(resolve, reject) {
+        createPaymentMethod: function(paymentEntity) {
+            return new Promise(function (resolve, reject) {
                 this.stripe.createPaymentMethod('card', this.cardElement).then(
                     function (result) {
-                        this.model.paymentEntity.providerPaymentMethodIdentifier = result.paymentMethod.id;
-                        this.raiseServerEvent('confirmPayment', this.model.paymentEntity, function (newPaymentEntity) {
-                            this.model.paymentEntity = newPaymentEntity;
-                            resolve(this.model.paymentEntity);
+                        paymentEntity.providerPaymentMethodIdentifier = result.paymentMethod.id;
+                        this.onPaymentMethodCreated(paymentEntity);
+                        resolve(paymentEntity);
                     }.bind(this), function () {
                         reject();
                     }.bind(this));
-                }.bind(this));
+            }.bind(this));
+        },
+        attemptPayment: function(paymentEntity) {
+            return new Promise(function(resolve, reject){
+                if (!paymentEntity.providerPaymentMethodIdentifier){
+                    this.createPaymentMethod(paymentEntity).then(function(paymentEntity){
+                        this.confirmPaymentOnServer(paymentEntity).then(resolve, reject);
+                    }.bind(this), function(){
+                        reject();
+                    }.bind(this));
+                } else {
+                    this.confirmPaymentOnServer(paymentEntity).then(resolve, reject);
+                }
+            }.bind(this));
+        },
+        confirmPaymentOnServer: function(paymentEntity){
+            return new Promise(function(resolve, reject){
+                this.raiseServerEvent('confirmPayment', paymentEntity, function(paymentEntity){
+                    this.onPaymentEntityStatusUpdated(paymentEntity).then(resolve);
+                }.bind(this), function(){
+                    reject();
+                })
             }.bind(this));
         }
     };
