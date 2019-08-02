@@ -1,0 +1,1048 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "722bacc4fb504ed7f2076826a8ac5a66",
+    "packages": [
+        {
+            "name": "firebase/php-jwt",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": " 4.8.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "role": "Developer",
+                    "email": "neuman+pear@twilio.com"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "role": "Developer",
+                    "email": "anant@php.net"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2017-06-27T22:17:23+00:00"
+        },
+        {
+            "name": "gcdtech/rhubarb-scaffold-payments",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gcdtech/rhubarb.scaffold.payments",
+                "reference": "667e3973ed2657d06eb3579229fe71bf59345cd2"
+            },
+            "require": {
+                "gcdtech/usecases": "^1.0.0",
+                "rhubarbphp/module-leaf": "^1.0.0",
+                "rhubarbphp/module-leaf-common-controls": "^1.0.0",
+                "rhubarbphp/module-stem": "^1.5.6",
+                "rhubarbphp/rhubarb": "^1.3.21",
+                "rhubarbphp/scaffold-communications": "^1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gcd\\Scaffold\\Payments\\": "src/",
+                    "Gcd\\Scaffold\\Payments\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "A pattern for SCA friendly payments",
+            "time": "2019-08-02T10:46:39+00:00"
+        },
+        {
+            "name": "gcdtech/usecases",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GCDTech/php-usecase-pattern.git",
+                "reference": "d03c669f3cd33e2f67f8f75f88eba885143e6133"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GCDTech/php-usecase-pattern/zipball/d03c669f3cd33e2f67f8f75f88eba885143e6133",
+                "reference": "d03c669f3cd33e2f67f8f75f88eba885143e6133",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0.0",
+                "psr/container": "^1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gcd\\UseCases\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Cuthbert",
+                    "email": "acuthbert@gcdtech.com"
+                }
+            ],
+            "description": "Base classes and interfaces for implementing the Use Case pattern along with entities and entity emitting iterators.",
+            "time": "2019-08-01T10:59:00+00:00"
+        },
+        {
+            "name": "psr/container",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "rhubarbphp/custard",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Custard.git",
+                "reference": "311ddf0f668eb1477f38b6f7926783840738deda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Custard/zipball/311ddf0f668eb1477f38b6f7926783840738deda",
+                "reference": "311ddf0f668eb1477f38b6f7926783840738deda",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/console": ">=2.7.5"
+            },
+            "bin": [
+                "bin/custard",
+                "bin/vcustard"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Custard\\": "src/",
+                    "Rhubarb\\Custard\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Provides command line tools for Rhubarb projects.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "cli",
+                "command-line",
+                "custard",
+                "framework",
+                "php",
+                "rhubarb",
+                "tools"
+            ],
+            "time": "2019-04-05T16:24:43+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-csrfprotection",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.CsrfProtection.git",
+                "reference": "3472b0cce4137b33e205183c19530b07f5a17a0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.CsrfProtection/zipball/3472b0cce4137b33e205183c19530b07f5a17a0d",
+                "reference": "3472b0cce4137b33e205183c19530b07f5a17a0d",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/rhubarb": "^1.5.6"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.0.0",
+                "codeception/specify": "^0.4.6",
+                "codeception/verify": "^0.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Csrf\\": "src/",
+                    "Rhubarb\\Csrf\\Tests\\": "tests/unit/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A means to provide token based CSRF protection",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "csrf",
+                "framework",
+                "php",
+                "protection",
+                "rhubarb",
+                "token"
+            ],
+            "time": "2018-01-15T21:02:22+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-jsvalidation",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.JsValidation.git",
+                "reference": "84f930dbabb60585191bc25984789077fffdd8ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.JsValidation/zipball/84f930dbabb60585191bc25984789077fffdd8ed",
+                "reference": "84f930dbabb60585191bc25984789077fffdd8ed",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "description": "Provides javascript validation patterns for HTML forms",
+            "time": "2019-06-12T14:12:53+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-leaf",
+            "version": "1.4.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.Leaf.git",
+                "reference": "e862606de4983f08e24c6bad5efb6e8d175067c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf/zipball/e862606de4983f08e24c6bad5efb6e8d175067c8",
+                "reference": "e862606de4983f08e24c6bad5efb6e8d175067c8",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/custard": "^1.0.9",
+                "rhubarbphp/module-csrfprotection": "^1.0.5",
+                "rhubarbphp/module-jsvalidation": "^1.0.0",
+                "rhubarbphp/rhubarb": "^1.1.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.0.0",
+                "pdepend/pdepend": "^2.0.0",
+                "phploc/phploc": "^3.0.0",
+                "phpmd/phpmd": "^2.0.0",
+                "rhubarbphp/module-build-status-updater": "^1.0.5",
+                "sebastian/phpcpd": "^2.0.0",
+                "squizlabs/php_codesniffer": "^2.0.0",
+                "tan-tan-kanarek/github-php-client": "^1.0.0",
+                "theseer/phpdox": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Leaf\\": "src/",
+                    "Rhubarb\\Leaf\\Tests\\": "tests/unit/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A nestable user interface building module for the Rhubarb PHP framework based upon the model-view-presenter pattern.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "framework",
+                "leaf",
+                "mvp",
+                "php",
+                "presenter",
+                "rhubarb"
+            ],
+            "time": "2019-06-10T13:51:09+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-leaf-common-controls",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.Leaf.CommonControls.git",
+                "reference": "32f5d5c794c7cda7b61c52582d2df7332741d741"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.CommonControls/zipball/32f5d5c794c7cda7b61c52582d2df7332741d741",
+                "reference": "32f5d5c794c7cda7b61c52582d2df7332741d741",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/module-leaf": "^1.1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Leaf\\Controls\\Common\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Common form control leaves for the leaf module of Rhubarb",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "framework",
+                "leaf",
+                "mvp",
+                "php",
+                "presenter",
+                "rhubarb"
+            ],
+            "time": "2019-06-20T14:48:45+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-leaf-crud",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.Leaf.Crud.git",
+                "reference": "f33470101614c54110fe13116d4dee2035c209ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Crud/zipball/f33470101614c54110fe13116d4dee2035c209ff",
+                "reference": "f33470101614c54110fe13116d4dee2035c209ff",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/module-leaf": "^1.3.0",
+                "rhubarbphp/module-leaf-common-controls": "^1.0.31",
+                "rhubarbphp/module-leaf-table": "^1.1",
+                "rhubarbphp/module-stem": "^1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Leaf\\Crud\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Provides some patterns for CRUD application development.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "framework",
+                "patterns",
+                "php",
+                "rhubarb"
+            ],
+            "time": "2018-02-14T11:29:13+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-leaf-paging",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.Leaf.Paging.git",
+                "reference": "abb2f0d9029edfe9f05097385f9f96435e8c2ce6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Paging/zipball/abb2f0d9029edfe9f05097385f9f96435e8c2ce6",
+                "reference": "abb2f0d9029edfe9f05097385f9f96435e8c2ce6",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/module-leaf": "^1.3.0",
+                "rhubarbphp/rhubarb": "^1.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Leaf\\Paging\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Provides paging patterns leaf development.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "framework",
+                "paging",
+                "php",
+                "rhubarb"
+            ],
+            "time": "2017-01-26T09:57:23+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-leaf-table",
+            "version": "1.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.Leaf.Table.git",
+                "reference": "c4245e8c52a9fe0b7a35a3700de63825000e692d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Leaf.Table/zipball/c4245e8c52a9fe0b7a35a3700de63825000e692d",
+                "reference": "c4245e8c52a9fe0b7a35a3700de63825000e692d",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/module-leaf": "^1.3.0",
+                "rhubarbphp/module-leaf-paging": "^1.1.0",
+                "rhubarbphp/module-stem": "^1.3.7",
+                "rhubarbphp/rhubarb": "^1.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Leaf\\Table\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A table leaf for presenting sortable tabular data.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "framework",
+                "leaf",
+                "mvp",
+                "php",
+                "presenter",
+                "rhubarb"
+            ],
+            "time": "2019-07-18T13:41:04+00:00"
+        },
+        {
+            "name": "rhubarbphp/module-stem",
+            "version": "1.8.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Module.Stem.git",
+                "reference": "123cde581c0afc41404c4f15811a36157606e1ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Module.Stem/zipball/123cde581c0afc41404c4f15811a36157606e1ac",
+                "reference": "123cde581c0afc41404c4f15811a36157606e1ac",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/rhubarb": "^1.5.2"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.1.8",
+                "pdepend/pdepend": "^2.0.0",
+                "phploc/phploc": "^3.0.0",
+                "phpmd/phpmd": "^2.0.0",
+                "rhubarbphp/custard": "^1.0.0",
+                "rhubarbphp/module-build-status-updater": "^1.0.4",
+                "sebastian/phpcpd": "^2.0.0",
+                "squizlabs/php_codesniffer": "^2.0.0",
+                "tan-tan-kanarek/github-php-client": "^1.0.0",
+                "theseer/phpdox": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Stem\\": "src/",
+                    "Rhubarb\\Stem\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A data modelling and ORM module for the Rhubarb PHP framework",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "Modelling",
+                "data",
+                "framework",
+                "model",
+                "orm",
+                "php"
+            ],
+            "time": "2019-05-30T14:47:40+00:00"
+        },
+        {
+            "name": "rhubarbphp/rhubarb",
+            "version": "1.6.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Rhubarb.git",
+                "reference": "5651d44c1550d6b858466469c9430266825ca8cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Rhubarb/zipball/5651d44c1550d6b858466469c9430266825ca8cb",
+                "reference": "5651d44c1550d6b858466469c9430266825ca8cb",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "^4.0 || ^5.0",
+                "php": ">=5.6.0",
+                "psr/container": "^1.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.0.0",
+                "rhubarbphp/custard": "^1.0.9",
+                "rhubarbphp/module-build-status-updater": "^1.0.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Crown\\": "src/",
+                    "Rhubarb\\Crown\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A modern enterprise ready PHP framework",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "framework",
+                "php"
+            ],
+            "time": "2019-07-11T14:50:18+00:00"
+        },
+        {
+            "name": "rhubarbphp/scaffold-application-settings",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Scaffold.ApplicationSettings.git",
+                "reference": "e10e1c5d44d2e9085155790aa036f743ab3bffea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.ApplicationSettings/zipball/e10e1c5d44d2e9085155790aa036f743ab3bffea",
+                "reference": "e10e1c5d44d2e9085155790aa036f743ab3bffea",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/module-stem": "*",
+                "rhubarbphp/rhubarb": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Scaffolds\\ApplicationSettings\\": "src/",
+                    "Rhubarb\\Scaffolds\\ApplicationSettings\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Stores system wide application settings in the default repository.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "Settings",
+                "framework",
+                "php",
+                "rhubarb"
+            ],
+            "time": "2016-10-27T21:23:22+00:00"
+        },
+        {
+            "name": "rhubarbphp/scaffold-background-tasks",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Scaffold.BackgroundTasks.git",
+                "reference": "53b78058b0614e9039fb7c9511613ad5fe83bb18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.BackgroundTasks/zipball/53b78058b0614e9039fb7c9511613ad5fe83bb18",
+                "reference": "53b78058b0614e9039fb7c9511613ad5fe83bb18",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "rhubarbphp/module-leaf": "^1.3",
+                "rhubarbphp/module-stem": "^1.1.0",
+                "rhubarbphp/rhubarb": "^1.1.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Scaffolds\\BackgroundTasks\\": "src/",
+                    "Rhubarb\\Scaffolds\\BackgroundTasks\\Tests\\": "tests/unit/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Provides a background task processing module.",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "background",
+                "framework",
+                "php",
+                "rhubarb",
+                "task"
+            ],
+            "time": "2019-05-09T13:17:20+00:00"
+        },
+        {
+            "name": "rhubarbphp/scaffold-communications",
+            "version": "1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RhubarbPHP/Scaffold.Communications.git",
+                "reference": "e58ed9adeb96f910aa2ea637d1ccffd51ff31269"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RhubarbPHP/Scaffold.Communications/zipball/e58ed9adeb96f910aa2ea637d1ccffd51ff31269",
+                "reference": "e58ed9adeb96f910aa2ea637d1ccffd51ff31269",
+                "shasum": ""
+            },
+            "require": {
+                "rhubarbphp/module-leaf": "^1.0.0",
+                "rhubarbphp/module-leaf-common-controls": "^1.0.8",
+                "rhubarbphp/module-leaf-crud": "^1.0",
+                "rhubarbphp/module-stem": "*",
+                "rhubarbphp/rhubarb": "*",
+                "rhubarbphp/scaffold-application-settings": "^1.0.0",
+                "rhubarbphp/scaffold-background-tasks": "*"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.0.0",
+                "phpmd/phpmd": "*",
+                "rhubarbphp/custard": ">1.0",
+                "rhubarbphp/module-build-status-updater": "dev-debug as 1.0.3",
+                "sebastian/phpcpd": "*",
+                "squizlabs/php_codesniffer": "*",
+                "tan-tan-kanarek/github-php-client": "dev-master as 1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhubarb\\Scaffolds\\Communications\\": "src/",
+                    "Rhubarb\\Scaffolds\\Communications\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Provides a basic layer for handling communications",
+            "homepage": "http://www.rhubarbphp.com/",
+            "keywords": [
+                "communications",
+                "email",
+                "orders",
+                "php",
+                "rhubarb"
+            ],
+            "time": "2019-05-15T09:57:51+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v6.41.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "abd52aed846b52db9365b470be696d0905c08b01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/abd52aed846b52db9365b470be696d0905c08b01",
+                "reference": "abd52aed846b52db9365b470be696d0905c08b01",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "1.*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0",
+                "symfony/process": "~2.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "time": "2019-08-01T01:41:19+00:00"
+        },
+        {
+            "name": "symfony/console",
+            "version": "v4.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9",
+                "reference": "8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php73": "^1.8",
+                "symfony/service-contracts": "^1.1"
+            },
+            "conflict": {
+                "symfony/dependency-injection": "<3.4",
+                "symfony/event-dispatcher": "<4.3",
+                "symfony/process": "<3.3"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~3.4|~4.0",
+                "symfony/dependency-injection": "~3.4|~4.0",
+                "symfony/event-dispatcher": "^4.3",
+                "symfony/lock": "~3.4|~4.0",
+                "symfony/process": "~3.4|~4.0",
+                "symfony/var-dumper": "^4.3"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/lock": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Console\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-07-24T17:13:59+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
+                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php73",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php73.git",
+                "reference": "d1fb4abcc0c47be136208ad9d68bf59f1ee17abd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/d1fb4abcc0c47be136208ad9d68bf59f1ee17abd",
+                "reference": "d1fb4abcc0c47be136208ad9d68bf59f1ee17abd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "symfony/service-contracts",
+            "version": "v1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "f391a00de78ec7ec8cf5cdcdae59ec7b883edb8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/f391a00de78ec7ec8cf5cdcdae59ec7b883edb8d",
+                "reference": "f391a00de78ec7ec8cf5cdcdae59ec7b883edb8d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "psr/container": "^1.0"
+            },
+            "suggest": {
+                "symfony/service-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\Service\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to writing services",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "time": "2019-06-13T11:15:36+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "gcdtech/rhubarb-scaffold-payments": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
