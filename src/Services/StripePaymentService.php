@@ -2,6 +2,7 @@
 
 namespace Gcd\Scaffold\Payments\Stripe\Services;
 
+use Gcd\Scaffold\Payments\Services\PaymentService;
 use Gcd\Scaffold\Payments\Stripe\Settings\StripeSettings;
 use Gcd\Scaffold\Payments\UI\Entities\PaymentEntity;
 use Stripe\Customer;
@@ -9,7 +10,7 @@ use Stripe\Issuing\Card;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
-class StripePaymentService extends PaymentEntity
+class StripePaymentService extends PaymentService
 {
     public function __construct()
     {
@@ -65,4 +66,19 @@ class StripePaymentService extends PaymentEntity
 
          return $entity;
      }
+
+    public function confirmPayment(PaymentEntity $entity): PaymentEntity
+    {
+        // TODO: Implement confirmPayment() method.
+    }
+
+    public function refundPayment(PaymentEntity $entity): PaymentEntity
+    {
+        // TODO: Implement refundPayment() method.
+    }
+
+    public function settlePayment(PaymentEntity $entity): PaymentEntity
+    {
+        // TODO: Implement settlePayment() method.
+    }
 }
