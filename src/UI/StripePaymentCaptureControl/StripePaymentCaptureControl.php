@@ -14,9 +14,9 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
      */
     protected $model;
 
-    public function __construct($name = null, $showPostcode = false)
+    public function __construct($name = null, $onSession = true, $showPostcode = false)
     {
-        parent::__construct($name, function() use ($showPostcode){
+        parent::__construct($name, $onSession, function() use ($showPostcode){
             $this->model->showPostcode = $showPostcode;
         });
     }
