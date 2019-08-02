@@ -39,4 +39,9 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
 
         $this->model->stripePublicKey = StripeSettings::singleton()->publicKey;
     }
+
+    protected function getProviderService()
+    {
+        // TODO: Implement getProviderService() method.
+    }
 }
