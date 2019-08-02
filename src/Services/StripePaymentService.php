@@ -8,6 +8,7 @@ use Gcd\Scaffold\Payments\UI\Entities\PaymentEntity;
 use Stripe\Customer;
 use Stripe\Issuing\Card;
 use Stripe\PaymentIntent;
+use Stripe\PaymentMethod;
 use Stripe\Stripe;
 
 class StripePaymentService extends PaymentService
@@ -23,44 +24,21 @@ class StripePaymentService extends PaymentService
      {
          // Throw an exception if the customerID && cardID isn't supplied OR paymentToken isn't supplied
 
-         // Expect the token to be setup with the name / address if it's required
-         if ($entity->providerIdentifier == PaymentEntity::TYPE_TOKEN) {
-             $customer = Customer::create([
-                 "email" => $entity->emailAddress,
-                 "phone" => $entity->phone
-             ]);
-             $card = Customer::createSource(
-                 $customer->id,
-                 [
-                     'source' => $entity->providerIdentifier,
-                 ]
-             );
-         } else if ($entity->providerIdentifierType == PaymentEntity::TYPE_CUSTOMER) {
-             $customer = Customer::retrieve($entity->providerIdentifier);
-             $card = Card::retrieve($customer->default_source);
-         }
-         else if ($entity->providerIdentifierType == PaymentEntity::TYPE_CARD) {
-             $card = Card::retrieve($entity->providerIdentifier);
-             $customer = Customer::retrieve($card->Customer->id);
-
-             // We want to create the payment intent based on the stored card details
-             $stripeParams['customer'] = $customer->id;
-             $stripeParams['payment_method'] = $card->id;
-         } else {
-             throw; // Throw an exception as we do not know the card type
-         }
-
          $stripeIntent = PaymentIntent::create([
              'description' => $entity->description,
              'amount' => $entity->amount * 100,
              'currency' => $entity->currency,
-             'customer' => $customer->id,
-             'payment_method' => $card->id,
              'confirmation_method' => 'manual',
-             'confirm' => true,
+             'payment_method' => $entity->providerPaymentMethodIdentifier,
+             'capture_method' => ($entity->autoSettle) ? 'automatic' : 'manual'
          ]);
 
          // Populate entities
+         $entity->providerIdentifier = $stripeIntent->id;
+
+         // Extra property used to save a round trip if startPayment and confirmPayment
+         // are called one after the other.
+         $entity->stripeIntent = $stripeIntent;
 
          // Call use case to save payment tracking information for creation
 
@@ -69,7 +47,30 @@ class StripePaymentService extends PaymentService
 
     public function confirmPayment(PaymentEntity $entity): PaymentEntity
     {
-        // TODO: Implement confirmPayment() method.
+        if (isset($entity->stripeIntent)){
+            $stripeIntent = $entity->stripeIntent;
+        } else {
+            $stripeIntent = PaymentIntent::retrieve($entity->providerIdentifier);
+        }
+
+        try {
+            $stripeIntent->confirm();
+
+            if (($stripeIntent->status == 'requires_action' || $stripeIntent->status == 'requires_source_action') &&
+                $stripeIntent->next_action->type == 'use_stripe_sdk') {
+                $entity->status = PaymentEntity::STATUS_AWAITING_AUTHENTICATION;
+                $entity->providerPublicIdentifier = $stripeIntent->client_secret;
+            } else if ($stripeIntent->status == 'succeeded') {
+                $entity->status = PaymentEntity::STATUS_SUCCESS;
+            } else {
+                $entity->status = PaymentEntity::STATUS_FAILED;
+            }
+        } catch (\Exception $er){
+            $entity->status = PaymentEntity::STATUS_FAILED;
+            $entity->error = $er->getMessage();
+        }
+
+        return $entity;
     }
 
     public function refundPayment(PaymentEntity $entity): PaymentEntity

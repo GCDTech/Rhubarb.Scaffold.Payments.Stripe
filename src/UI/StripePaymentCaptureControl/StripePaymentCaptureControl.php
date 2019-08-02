@@ -2,6 +2,7 @@
 
 namespace Gcd\Scaffold\Payments\Stripe\UI\StripePaymentCaptureControl;
 
+use Gcd\Scaffold\Payments\Stripe\Services\StripePaymentService;
 use Gcd\Scaffold\Payments\Stripe\Settings\StripeSettings;
 use Gcd\Scaffold\Payments\UI\PaymentCaptureControl\PaymentCaptureControl;
 use Rhubarb\Leaf\Leaves\LeafModel;
@@ -50,6 +51,6 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
 
     protected function getProviderService()
     {
-
+        return new StripePaymentService();
     }
 }
