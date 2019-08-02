@@ -14,6 +14,8 @@ class StripePaymentCaptureControlModel extends PaymentCaptureControlModel
 
     public $stripePublicKey;
 
+    public $showPostcode;
+
     public function __construct()
     {
         $this->confirmPaymentEvent = new Event();
@@ -23,6 +25,7 @@ class StripePaymentCaptureControlModel extends PaymentCaptureControlModel
     {
         $list = parent::getExposableModelProperties();
         $list[] = "stripePublicKey";
+        $list[] = "showPostcode";
 
         return $list;
     }

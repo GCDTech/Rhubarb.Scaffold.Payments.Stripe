@@ -13,6 +13,14 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
      */
     protected $model;
 
+    public function __construct($name = null, $showPostcode = false)
+    {
+        parent::__construct($name, function() use ($showPostcode){
+            $this->model->showPostcode = $showPostcode;
+        });
+    }
+
+
     /**
      * Returns the name of the standard view used for this leaf.
      *
