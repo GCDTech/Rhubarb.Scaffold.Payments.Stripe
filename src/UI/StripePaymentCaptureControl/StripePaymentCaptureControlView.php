@@ -32,7 +32,6 @@ class StripePaymentCaptureControlView extends PaymentCaptureControlView
     protected function printViewContent()
     {
         ?>
-        Stripe payment!
         <?php
     }
 }

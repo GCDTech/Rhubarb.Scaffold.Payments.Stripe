@@ -12,6 +12,15 @@ class StripePaymentCaptureControlModel extends PaymentCaptureControlModel
      */
     public $confirmPaymentEvent;
 
+    /**
+     * @var Event Raised at the start of a setup card payment journey to satisfy the Stripe SDK
+     *
+     * Should return the client secret of the intent.
+     */
+    public $createSetupIntentEvent;
+
+    public $setupIntentCompletedEvent;
+
     public $stripePublicKey;
 
     public $showPostcode;
@@ -19,6 +28,8 @@ class StripePaymentCaptureControlModel extends PaymentCaptureControlModel
     public function __construct()
     {
         $this->confirmPaymentEvent = new Event();
+        $this->createSetupIntentEvent = new Event();
+        $this->setupIntentCompletedEvent = new Event();
     }
 
     protected function getExposableModelProperties()

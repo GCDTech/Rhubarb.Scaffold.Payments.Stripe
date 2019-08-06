@@ -4,8 +4,10 @@ namespace Gcd\Scaffold\Payments\Stripe\UI\StripePaymentCaptureControl;
 
 use Gcd\Scaffold\Payments\Stripe\Services\StripePaymentService;
 use Gcd\Scaffold\Payments\Stripe\Settings\StripeSettings;
+use Gcd\Scaffold\Payments\UI\Entities\SetupEntity;
 use Gcd\Scaffold\Payments\UI\PaymentCaptureControl\PaymentCaptureControl;
 use Rhubarb\Leaf\Leaves\LeafModel;
+use Stripe\SetupIntent;
 
 class StripePaymentCaptureControl extends PaymentCaptureControl
 {
@@ -47,6 +49,20 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
         parent::onModelCreated();
 
         $this->model->stripePublicKey = StripeSettings::singleton()->publicKey;
+
+        $this->model->createSetupIntentEvent->attachHandler(function(){
+            $stripeService = $this->getProviderService();
+            return $stripeService->createSetupIntent();
+        });
+
+        $this->model->setupIntentCompletedEvent->attachHandler(function($setupEntity){
+            $setupEntity = SetupEntity::castFromObject($setupEntity);
+            $stripeService = $this->getProviderService();
+            $customerId = $stripeService->attachPaymentToCustomer($setupEntity->providerPaymentMethodIdentifier);
+            $setupEntity->providerCustomerId = $customerId;
+
+            return $setupEntity;
+        });
     }
 
     protected function getProviderService()
