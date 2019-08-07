@@ -2,7 +2,7 @@
 
 namespace Gcd\Scaffold\Payments\Stripe\Services;
 
-use Gcd\Scaffold\Payments\Services\PaymentService;
+use Gcd\Scaffold\Payments\Logic\Services\PaymentService;
 use Gcd\Scaffold\Payments\Stripe\Settings\StripeSettings;
 use Gcd\Scaffold\Payments\UI\Entities\PaymentEntity;
 use Gcd\Scaffold\Payments\UI\Entities\SetupEntity;
@@ -81,9 +81,11 @@ class StripePaymentService extends PaymentService
                 // the raw API response body to get past this.
                 $rawBody = json_decode($er->httpBody, false);
 
-                $entity->providerIdentifier = $rawBody->payment_intent->id;
-                $entity->providerPublicIdentifier = $rawBody->payment_intent->client_secret;
                 $entity->status = PaymentEntity::STATUS_AWAITING_AUTHENTICATION;
+                $entity->providerIdentifier = $rawBody->error->payment_intent->id;
+
+                $stripeIntent = PaymentMethod::retrieve($entity->providerPaymentMethodIdentifier);
+                $this->syncEntityWithPaymentMethod($entity, $stripeIntent);
             } else {
                 $entity->status = PaymentEntity::STATUS_FAILED;
                 $entity->error = $er->getMessage();
@@ -134,12 +136,28 @@ class StripePaymentService extends PaymentService
         // TODO: Implement settlePayment() method.
     }
 
+    private function syncEntityWithPaymentMethod(PaymentEntity $entity, PaymentMethod $paymentMethod)
+    {
+        $expiry = new \DateTime($paymentMethod->card->exp_year."-".$paymentMethod->card->exp_month."-01");
+        $entity->cardExpiry = $expiry->format("m/y");
+        $entity->cardType = $paymentMethod->card->brand;
+        $entity->cardLastFourDigits = $paymentMethod->card->last4;
+        $entity->addressCity = isset($entity->addressCity) ? $entity->addressCity : $paymentMethod->billing_details->address->city;
+        $entity->addressLine1 = isset($entity->addressLine1) ? $entity->addressLine1 : $paymentMethod->billing_details->address->line1;
+        $entity->addressLine2 = isset($entity->addressLine2) ? $entity->addressLine2 : $paymentMethod->billing_details->address->line2;
+        $entity->addressPostCode = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->address->postal_code;
+        $entity->fullName = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->name;
+        $entity->emailAddress = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->phone;
+        $entity->phone = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->email;
+    }
+
     private function syncEntityWithIntent(PaymentEntity $entity, PaymentIntent $stripeIntent) {
         // Populate entities
-        $paymentMethod = PaymentMethod::retrieve($stripeIntent->payment_method);
-        $expiry = new \DateTime($paymentMethod->card->exp_year."-".$paymentMethod->card->exp_month."-01");
+        if ($stripeIntent->payment_method) {
+            $paymentMethod = PaymentMethod::retrieve($stripeIntent->payment_method);
+            $this->syncEntityWithPaymentMethod($entity, $paymentMethod);
+        }
 
-        $entity->provider = 'Stripe';
         $entity->providerIdentifier = $stripeIntent->id;
         $entity->providerPublicIdentifier = $stripeIntent->client_secret;
         $entity->providerPaymentMethodIdentifier = $stripeIntent->payment_method;
@@ -164,17 +182,47 @@ class StripePaymentService extends PaymentService
             $entity->providerPublicIdentifier = $stripeIntent->client_secret;
         }
 
-        $entity->cardExpiry = $expiry->format("m/y");
-        $entity->cardType = $paymentMethod->card->brand;
-        $entity->cardLastFourDigits = $paymentMethod->card->last4;
+        return $entity;
+    }
 
-        $entity->addressCity = isset($entity->addressCity) ? $entity->addressCity : $paymentMethod->billing_details->address->city;
-        $entity->addressLine1 = isset($entity->addressLine1) ? $entity->addressLine1 : $paymentMethod->billing_details->address->line1;
-        $entity->addressLine2 = isset($entity->addressLine2) ? $entity->addressLine2 : $paymentMethod->billing_details->address->line2;
-        $entity->addressPostCode = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->address->postal_code;
-        $entity->fullName = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->name;
-        $entity->emailAddress = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->phone;
-        $entity->phone = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->email;
+    public function getAlias(): string
+    {
+        return "Stripe";
+    }
+
+    /**
+     * An opportunity for a payment service to repopulate properties that aren't stored
+     * in the scaffold. For example Stripe do not allow you to store the public secret
+     * for a payment intent, however we must restore this to the entity in order for
+     * the follow on screen to be able to process the payment.
+     *
+     * @param PaymentEntity $entity
+     * @return PaymentEntity
+     */
+    public function rehydratePayment(PaymentEntity $entity): PaymentEntity
+    {
+        $originalPaymentMethod = $entity->providerPaymentMethodIdentifier;
+
+        $paymentIntent = PaymentIntent::retrieve($entity->providerIdentifier);
+        $entity->stripeIntent = $paymentIntent;
+
+        // If awaiting SCA Stripe remove the payment method from the entity but
+        // we'll want to use this later to restart the payment.
+        $this->syncEntityWithIntent($entity, $paymentIntent);
+        $entity->providerPaymentMethodIdentifier = $originalPaymentMethod;
+
+        return $entity;
+    }
+
+    public function restartPaymentOnSession(PaymentEntity $entity): PaymentEntity
+    {
+        $this->rehydratePayment($entity);
+
+        $entity->status = PaymentEntity::STATUS_CREATED;
+        $entity->stripeIntent->payment_method = $entity->providerPaymentMethodIdentifier;
+        $entity->stripeIntent->save();
+
+        $this->confirmPayment($entity);
 
         return $entity;
     }

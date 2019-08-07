@@ -31,18 +31,7 @@ rhubarb.vb.create('StripePaymentCaptureControlViewBridge', function(parent) {
             }.bind(this));
         },
         authenticatePayment: function(paymentEntity) {
-            return new Promise(function(resolve, reject){
-                this.stripe.handleCardAction(paymentEntity.providerPublicIdentifier).then(function(result){
-                    if (result.error){
-                        paymentEntity.error = result.error.message;
-                        reject(paymentEntity)
-                    } else {
-                        resolve(paymentEntity);
-                    }
-                }, function() {
-                    reject(paymentEntity);
-                });
-            }.bind(this));
+            return this.findChildViewBridge('Authenticate').startCustomerAuthentication(paymentEntity);
         },
         createPaymentMethod: function(paymentEntity) {
             return new Promise(function (resolve, reject) {
