@@ -146,9 +146,9 @@ class StripePaymentService extends PaymentService
         $entity->addressLine1 = isset($entity->addressLine1) ? $entity->addressLine1 : $paymentMethod->billing_details->address->line1;
         $entity->addressLine2 = isset($entity->addressLine2) ? $entity->addressLine2 : $paymentMethod->billing_details->address->line2;
         $entity->addressPostCode = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->address->postal_code;
-        $entity->fullName = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->name;
-        $entity->emailAddress = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->phone;
-        $entity->phone = isset($entity->addressPostCode) ? $entity->addressPostCode : $paymentMethod->billing_details->email;
+        $entity->fullName = isset($entity->fullName) ? $entity->fullName : $paymentMethod->billing_details->name;
+        $entity->emailAddress = isset($entity->emailAddress) ? $entity->emailAddress : $paymentMethod->billing_details->phone;
+        $entity->phone = isset($entity->phone) ? $entity->phone : $paymentMethod->billing_details->email;
     }
 
     private function syncEntityWithIntent(PaymentEntity $entity, PaymentIntent $stripeIntent) {
