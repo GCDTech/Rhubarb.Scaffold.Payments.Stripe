@@ -50,16 +50,21 @@ class StripePaymentCaptureControl extends PaymentCaptureControl
 
         $this->model->stripePublicKey = StripeSettings::singleton()->publicKey;
 
-        $this->model->createSetupIntentEvent->attachHandler(function(){
+        $this->model->createSetupIntentEvent->attachHandler(function($providerCustomerId){
             $stripeService = $this->getProviderService();
-            return $stripeService->createSetupIntent();
+            return $stripeService->createSetupIntent($providerCustomerId);
         });
 
         $this->model->setupIntentCompletedEvent->attachHandler(function($setupEntity){
             $setupEntity = SetupEntity::castFromObject($setupEntity);
             $stripeService = $this->getProviderService();
-            $customerId = $stripeService->attachPaymentToCustomer($setupEntity->providerPaymentMethodIdentifier);
-            $setupEntity->providerCustomerId = $customerId;
+            $paymentMethod = $stripeService->attachPaymentToCustomer($setupEntity->providerPaymentMethodIdentifier,
+                $setupEntity->providerCustomerId);
+            $setupEntity->providerCustomerId = $paymentMethod->customer;
+            $setupEntity->cardLastFourDigits = $paymentMethod->card->last4;
+            $setupEntity->cardExpiryMonth = $paymentMethod->card->exp_month;
+            $setupEntity->cardExpiryYear = $paymentMethod->card->exp_year;
+            $setupEntity->cardType = $paymentMethod->card->brand;
 
             return $setupEntity;
         });

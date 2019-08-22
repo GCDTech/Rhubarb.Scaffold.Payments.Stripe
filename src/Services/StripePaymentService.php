@@ -24,23 +24,24 @@ class StripePaymentService extends PaymentService
         Stripe::setApiKey($stripeSettings->secretKey);
     }
 
-    public function attachPaymentToCustomer($paymentId, $customerId = null): string
+    public function attachPaymentToCustomer($paymentId, $customerId = null) : PaymentMethod
     {
         if (!$customerId){
-            $customer = Customer::create(['payment_method' => $paymentId]);
-            return $customer->id;
+            $customer = Customer::create();
+            $customerId = $customer->id;
         }
 
-        PaymentMethod::retrieve($paymentId)->attach(['customer' => $customerId]);
+        $paymentMethod = PaymentMethod::retrieve($paymentId)->attach(['customer' => $customerId]);
 
-        return $customerId;
+        return $paymentMethod;
     }
 
-    public function createSetupIntent(): SetupEntity
+    public function createSetupIntent($providerCustomerId = null): SetupEntity
     {
         $setupIntent = SetupIntent::create();
 
         $entity = new SetupEntity();
+        $entity->providerCustomerId = $providerCustomerId;
         $entity->providerIdentifier = $setupIntent->id;
         $entity->providerPublicIdentifier = $setupIntent->client_secret;
 
@@ -55,15 +56,29 @@ class StripePaymentService extends PaymentService
                 'amount' => $entity->amount * 100,
                 'currency' => $entity->currency,
                 'confirmation_method' => 'manual',
-                'payment_method' => $entity->providerPaymentMethodIdentifier,
                 'capture_method' => ($entity->autoSettle) ? 'automatic' : 'manual',
-                'off_session' => !$entity->onSession,          // Off session means the customer isn't around
-                'confirm' => !$entity->onSession               // confirm controls if the payment is confirmed
-                // automatically.
+                'payment_method_options' => [ 'card' => ['moto' => $entity->isMOTO] ],
+                'confirm' => !$entity->onSession || $entity->isMOTO // confirm controls if the payment is confirmed automatically.
             ];
+            if ($entity->metaData) {
+                $data['metadata'] = (array) $entity->metaData;
+            }
+
+            if (!$entity->onSession) {
+                $data['off_session'] = !$entity->onSession;
+            }
 
             if ($entity->providerCustomerId) {
                 $data['customer'] = $entity->providerCustomerId;
+            }
+
+            if ($entity->providerPaymentMethodType === PaymentEntity::TYPE_TOKEN) {
+                $data['payment_method_data'] = [
+                    'type' => 'card',
+                    'card' => ['token' => $entity->providerPaymentMethodIdentifier]
+                ];
+            } else {
+                $data['payment_method'] = $entity->providerPaymentMethodIdentifier;
             }
 
             $stripeIntent = PaymentIntent::create($data);
@@ -138,8 +153,8 @@ class StripePaymentService extends PaymentService
 
     private function syncEntityWithPaymentMethod(PaymentEntity $entity, PaymentMethod $paymentMethod)
     {
-        $expiry = new \DateTime($paymentMethod->card->exp_year."-".$paymentMethod->card->exp_month."-01");
-        $entity->cardExpiry = $expiry->format("m/y");
+        $entity->cardExpiryMonth = $paymentMethod->card->exp_month;
+        $entity->cardExpiryYear = $paymentMethod->card->exp_year;
         $entity->cardType = $paymentMethod->card->brand;
         $entity->cardLastFourDigits = $paymentMethod->card->last4;
         $entity->addressCity = isset($entity->addressCity) ? $entity->addressCity : $paymentMethod->billing_details->address->city;
@@ -162,6 +177,7 @@ class StripePaymentService extends PaymentService
         $entity->providerPublicIdentifier = $stripeIntent->client_secret;
         $entity->providerPaymentMethodIdentifier = $stripeIntent->payment_method;
         $entity->providerPaymentMethodType = $stripeIntent->payment_method_types[0];
+        $entity->providerChargeIdentifier = count($stripeIntent->charges->data ) > 0 ? $stripeIntent->charges->data[0]->id : null;
 
         switch($stripeIntent->status){
             case "succeeded":

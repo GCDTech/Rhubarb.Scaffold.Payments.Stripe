@@ -12,9 +12,9 @@ rhubarb.vb.create('StripePaymentCaptureControlViewBridge', function(parent) {
 
             this.cardElement.mount(this.viewNode);
         },
-        setupPaymentMethod: function() {
+        setupPaymentMethod: function(providerCustomerId) {
             return new Promise(function(resolve, reject){
-                this.raiseServerEvent('createSetupIntent', function(setupEntity){
+                this.raiseServerEvent('createSetupIntent', providerCustomerId, function(setupEntity){
                     this.stripe.handleCardSetup(setupEntity.providerPublicIdentifier, this.cardElement).then(function(result){
                         if (result.error) {
                             setupEntity.error = result.error.message;
@@ -37,6 +37,10 @@ rhubarb.vb.create('StripePaymentCaptureControlViewBridge', function(parent) {
             return new Promise(function (resolve, reject) {
                 this.stripe.createPaymentMethod('card', this.cardElement).then(
                     function (result) {
+                        paymentEntity.cardType = result.paymentMethod.card.brand;
+                        paymentEntity.cardLastFourDigits = result.paymentMethod.card.last4;
+                        paymentEntity.cardExpiryMonth = result.paymentMethod.card.exp_month;
+                        paymentEntity.cardExpiryYear = result.paymentMethod.card.exp_year;
                         paymentEntity.providerPaymentMethodIdentifier = result.paymentMethod.id;
                         resolve(paymentEntity);
                     }.bind(this), function () {
